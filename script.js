@@ -5,7 +5,7 @@ let computerScore = 0;
 let round_Count = 0;
 
 function playerPlay() {
-  player = prompt("Write an option:\nRock\nPaper\nScissors?");
+  player = prompt("Write an option:\nRock\nPaper\nScissors?", "Rock");
   player = player.toLowerCase();
   switch (player) {
     case "rock":
