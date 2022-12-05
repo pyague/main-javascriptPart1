@@ -4,8 +4,20 @@ let playerScore = 0;
 let computerScore = 0;
 let round_Count = 0;
 
+function newGame(){
+  playerScore = 0;
+  computerScore = 0;
+  round_Count = 0;
+  game();
+}
+
 function playerPlay() {
-  player = prompt("Write an option:\nRock\nPaper\nScissors?");
+  player = prompt(`The objective is to defeat the opponent by selecting the weapon that wins, according to the following rules:\nThe stone crushes the scissors\nThe scissors cut the paper\nThe paper wraps the stone\n
+  Write an option:\nRock\nPaper\nScissors?`);
+  if(player === null){
+    let playAgain = confirm("Do you want to play again?")
+    if(playAgain){ newGame() }
+  }
   player = player.trim().toLowerCase();
   switch (player) {
     case "rock":
@@ -24,7 +36,9 @@ function playerPlay() {
       console.log(`The computer chose: ${computer}\nYou chose: ${player}`);
       break;
     default:
-      player = undefined;
+      window.alert("Enter a valid option")
+      console.log("Incorrect Input! Write a valid option")
+      playerPlay();
   }
 }
 
@@ -58,10 +72,6 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   for (let i = 0; i < 5; i++) {
     playerPlay();
-    while (player === undefined) {
-      playerPlay();
-      console.log(`Enter a valid option\nRound: ${round_Count}`);
-    }
     if (player === "rock") {
       round_Count = i + 1;
       console.log(
@@ -84,10 +94,16 @@ function game() {
   }
   if (playerScore <= computerScore) {
     window.alert("You lost! Sorry!");
+    let playAgain = confirm("Do you want to play again?")
+    if(playAgain === true) { newGame()}
   } else if (playerScore > computerScore) {
     window.alert("Congratulations! You won!");
+    let playAgain = confirm("Do you want to play again?")
+    if(playAgain === true) { newGame()}
   } else if (playerScore === computerScore) {
     window.alert("It's a tie!");
+    let playAgain = confirm("Do you want to play again?")
+    if(playAgain === true) { newGame()}
   }
 }
 
